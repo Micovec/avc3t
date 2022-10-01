@@ -1,0 +1,22 @@
+[submodule "vendor/assimp"]
+	path = vendor/assimp
+	url = https://github.com/assimp/assimp.git
+[submodule "vendor/glfw"]
+	path = vendor/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "vendor/glm"]
+	path = vendor/glm
+	url = https://github.com/g-truc/glm.git
+[submodule "vendor/nativefiledialog-extended"]
+	path = vendor/nativefiledialog-extended
+	url = https://github.com/btzy/nativefiledialog-extended.git
+[submodule "vendor/glm"]
+	path = vendor/glm
+	url = https://github.com/g-truc/glm.git
+[submodule "src/vendor/imgui"]
+	path = src/vendor/imgui
+	url = https://github.com/ocornut/imgui.git
+	branch = docking
+[submodule "src/vendor/stb"]
+	path = src/vendor/stb
+	url = https://github.com/nothings/stb.git
