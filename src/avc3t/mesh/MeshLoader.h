@@ -1,7 +1,5 @@
 #pragma once
 
-#include <assimp/scene.h>
-
 #include "Mesh.h"
 #include "Material.h"
 

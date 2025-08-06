@@ -17,7 +17,7 @@ namespace AVC3T {
 
         static void                Init();
         static void                Deinit();
-        static void                LoadObject(const std::string& objectName, const std::string& filename);
+        static void                LoadObject(const std::string& objectName, const std::string& objectMtl, const std::string& objectObj, const std::string& objectPng);
         static void                UnloadObject(const std::string& objectName);
         static SceneObject         CreateObjectCopy(const std::string& name);
 

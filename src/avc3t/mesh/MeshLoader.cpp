@@ -6,6 +6,7 @@
 
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
+#include <assimp/scene.h>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
@@ -14,16 +15,16 @@
 #include "../utils/StringUtils.h"
 
 namespace AVC3T {
-    std::shared_ptr<Mesh> MeshLoader::LoadObj(const std::string& filename) {
-        Assimp::Importer importer;
+    std::shared_ptr<Mesh> MeshLoader::LoadObj(const std::string&) {
+        Assimp::Importer                             importer;
 
-        const aiScene*   scene = importer.ReadFile(filename,
-                                                   aiProcess_Triangulate |              // Triangulate polygons
-                                                       aiProcess_PreTransformVertices | // Transforms scene hierarchy into
-                                                                                        // one root with geometry-leafs only.
-                                                                                        // For more see Doc.
-                                                       aiProcess_GenSmoothNormals |     // Calculate normals per vertex.
-                                                       aiProcess_JoinIdenticalVertices);
+        importer.ReadFileFromMemory() const aiScene* scene = importer.ReadFile(filename,
+                                                                               aiProcess_Triangulate |              // Triangulate polygons
+                                                                                   aiProcess_PreTransformVertices | // Transforms scene hierarchy into
+                                                                                                                    // one root with geometry-leafs only.
+                                                                                                                    // For more see Doc.
+                                                                                   aiProcess_GenSmoothNormals |     // Calculate normals per vertex.
+                                                                                   aiProcess_JoinIdenticalVertices);
 
         if (scene == nullptr) {
             std::cerr << "Could not load mesh: " << importer.GetErrorString() << std::endl;
@@ -102,6 +103,7 @@ namespace AVC3T {
         std::string diffuseTextureFilename = directory.string() + static_cast<char>(std::filesystem::path::preferred_separator) + diffuseTexturePath.C_Str();
 
         return std::make_shared<Mesh>(va, ib, Material(ambientColor, diffuseColor, LoadTexture(diffuseTextureFilename)));
+        return {};
     }
 
     std::shared_ptr<Texture> MeshLoader::LoadTexture(const std::string& filename) {

@@ -1,8 +1,17 @@
 #pragma once
 
 // #include <GL/glew.h>
-// #include <GLFW/glfw3.h>
+#ifdef __EMSCRIPTEN__
+#include <GL/gl.h>
+#include <GLES3/gl3.h>
+#define GL_GLEXT_PROTOTYPES
+#define EGL_EGLEXT_PROTOTYPES
+#include <emscripten.h>
+#else
 #include <glad/gl.h>
+#endif
+#include <GLFW/glfw3.h>
+
 #include <iostream>
 #include <signal.h>
 

@@ -13,7 +13,14 @@
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
+
+#ifdef __EMSCRIPTEN__
+#include <GL/gl.h>
+#include <GL/glut.h>
+#else
 #include <glad/gl.h> // Must be included before glfw
+#endif
+
 #include <stdio.h>
 #define GL_SILENCE_DEPRECATION
 #if defined(IMGUI_IMPL_OPENGL_ES2)
@@ -36,7 +43,7 @@
 // This example can also compile and run with Emscripten! See
 // 'Makefile.emscripten' for details.
 #ifdef __EMSCRIPTEN__
-#include "../libs/emscripten/emscripten_mainloop_stub.h"
+#include "../vendor/imgui/examples/libs/emscripten/emscripten_mainloop_stub.h"
 #endif
 
 static void glfw_error_callback(int error, const char* description) {
@@ -83,7 +90,7 @@ int main(int, char**) {
     if (window == nullptr)
         return 1;
     glfwMakeContextCurrent(window);
-    glfwSwapInterval(1); // Enable vsync
+    // glfwSwapInterval(1); // Enable vsync
 
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
@@ -137,7 +144,9 @@ int main(int, char**) {
     // io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0f,
     // nullptr, io.Fonts->GetGlyphRangesJapanese()); IM_ASSERT(font != nullptr);
 
+#ifndef __EMSCRIPTEN__
     gladLoadGL(glfwGetProcAddress); // Returns version
+#endif
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);

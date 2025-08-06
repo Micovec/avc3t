@@ -1,6 +1,7 @@
 #include "SceneObjectLibrary.h"
 
 #include "LibraryRecordNames.h"
+#include "LibraryFileValues.h"
 #include "../mesh/MeshLoader.h"
 
 namespace AVC3T {
@@ -9,7 +10,7 @@ namespace AVC3T {
         return library;
     }
 
-    void SceneObjectLibrary::LoadObject(const std::string& objectName, const std::string& filename) {
+    void SceneObjectLibrary::LoadObject(const std::string& objectName, const std::string& objectMtl, const std::string& objectObj, const std::string& objectPng) {
         SceneObjectLibrary& instance = GetInstance();
         auto                it       = instance.m_Meshes.find(objectName);
 

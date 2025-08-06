@@ -275,7 +275,7 @@ namespace AVC3T {
         unsigned int* data = new unsigned int[vertexBuffer->GetSize()];
 
         vertexArray->Bind();
-        GLCall(glGetBufferSubData(GL_ARRAY_BUFFER, 0, vertexBuffer->GetSize(), data));
+        // GLCall(glGetBufferSubData(GL_ARRAY_BUFFER, 0, vertexBuffer->GetSize(), data));
         vertexArray->Unbind();
 
         for (unsigned int i = 0; i < vertexBuffer->GetSize(); ++i) {
@@ -322,7 +322,7 @@ namespace AVC3T {
 
         data = new unsigned int[indexBuffer->GetCount()];
         indexBuffer->Bind();
-        GLCall(glGetBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, indexBuffer->GetCount() * sizeof(unsigned int), data));
+        // GLCall(glGetBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, indexBuffer->GetCount() * sizeof(unsigned int), data));
         indexBuffer->Unbind();
 
         for (unsigned int i = 0; i < indexBuffer->GetCount(); ++i) {

@@ -41,3 +41,9 @@ imgui.ini
 /INSTALL.vcxproj.filters
 /ZERO_CHECK.vcxproj
 /ZERO_CHECK.vcxproj.filters
+
+# Emscripten
+avc3t.html
+avc3t.js
+avc3t.wasm
+index.html

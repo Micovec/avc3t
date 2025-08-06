@@ -56,14 +56,14 @@ namespace AVC3T {
         linesShader->Bind();
         linesShader->SetUniformMat4f("u_MVP", PV);
         glLineWidth(3.f);
-        m_Renderer.DrawLines(*m_Gizmo.mesh->GetVertexArray());
+        // m_Renderer.DrawLines(*m_Gizmo.mesh->GetVertexArray());
         linesShader->Unbind();
 
         // Render grid
         linesShader->Bind();
         linesShader->SetUniformMat4f("u_MVP", PV);
         glLineWidth(2.f);
-        m_Renderer.DrawLines(*m_Grid.mesh->GetVertexArray());
+        // m_Renderer.DrawLines(*m_Grid.mesh->GetVertexArray());
         linesShader->Unbind();
 
         for (auto&& [_, objects] : sortedTransparentObjects) {
@@ -116,7 +116,7 @@ namespace AVC3T {
         switch (meshRendering) {
             case MeshRendering_Triangles: m_Renderer.Draw(*object->mesh->GetVertexArray(), *object->mesh->GetIndexBuffer()); break;
 
-            case MeshRendering_Lines: m_Renderer.DrawLines(*object->mesh->GetVertexArray()); break;
+            case MeshRendering_Lines: /*m_Renderer.DrawLines(*object->mesh->GetVertexArray()); */ break;
 
             default: assert(false);
         }
@@ -128,7 +128,7 @@ namespace AVC3T {
         linesShader->Bind();
         linesShader->SetUniformMat4f("u_MVP", mvp);
         glLineWidth(2.f);
-        m_Renderer.DrawLines(*m_Gizmo.mesh->GetVertexArray());
+        // m_Renderer.DrawLines(*m_Gizmo.mesh->GetVertexArray());
     }
 
     void Scene::EnableCameras() {

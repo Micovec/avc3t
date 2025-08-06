@@ -2,7 +2,7 @@
 
 #include <fstream>
 #include <imgui/imgui.h>
-#include <nfd.h>
+// #include <nfd.h>
 
 #include "../serialization/Deserializer.h"
 #include "../serialization/Serializer.h"
@@ -46,46 +46,46 @@ namespace AVC3T {
     }
 
     void MainMenuBar::Open() {
-        nfdchar_t*  outPath = nullptr;
-        nfdresult_t result  = NFD_OpenDialogU8_With(&outPath, nullptr);
+        // nfdchar_t*  outPath = nullptr;
+        // nfdresult_t result  = NFD_OpenDialogU8_With(&outPath, nullptr);
 
-        if (result == NFD_OKAY) {
-            m_Workspace.Clear();
-            m_Workspace.ResetScrolling();
-            ID::Reset();
+        // if (result == NFD_OKAY) {
+        //     m_Workspace.Clear();
+        //     m_Workspace.ResetScrolling();
+        //     ID::Reset();
 
-            Serializer ser;
-            try {
-                std::ifstream stream(outPath);
-                ser.Serialize(m_Workspace, m_Scene, stream);
-            } catch (const std::exception& e) {
-                m_ExceptionThrown  = true;
-                m_ExceptionMessage = e.what();
-            } catch (...) {
-                m_ExceptionThrown  = true;
-                m_ExceptionMessage = "Unknown exception";
-            }
-        }
+        //     Serializer ser;
+        //     try {
+        //         std::ifstream stream(outPath);
+        //         ser.Serialize(m_Workspace, m_Scene, stream);
+        //     } catch (const std::exception& e) {
+        //         m_ExceptionThrown  = true;
+        //         m_ExceptionMessage = e.what();
+        //     } catch (...) {
+        //         m_ExceptionThrown  = true;
+        //         m_ExceptionMessage = "Unknown exception";
+        //     }
+        // }
     }
 
     void MainMenuBar::Save() {
-        nfdchar_t*  outPath = nullptr;
-        nfdresult_t result  = NFD_SaveDialogU8_With(&outPath, nullptr);
+        // nfdchar_t*  outPath = nullptr;
+        // nfdresult_t result  = NFD_SaveDialogU8_With(&outPath, nullptr);
 
-        if (result == NFD_OKAY) {
-            Deserializer des;
+        // if (result == NFD_OKAY) {
+        //     Deserializer des;
 
-            try {
-                std::ofstream stream(outPath);
-                des.Deserialize(m_Workspace, stream);
-            } catch (const std::exception& e) {
-                m_ExceptionThrown  = true;
-                m_ExceptionMessage = e.what();
-            } catch (...) {
-                m_ExceptionThrown  = true;
-                m_ExceptionMessage = "Unknown exception";
-            }
-        }
+        //     try {
+        //         std::ofstream stream(outPath);
+        //         des.Deserialize(m_Workspace, stream);
+        //     } catch (const std::exception& e) {
+        //         m_ExceptionThrown  = true;
+        //         m_ExceptionMessage = e.what();
+        //     } catch (...) {
+        //         m_ExceptionThrown  = true;
+        //         m_ExceptionMessage = "Unknown exception";
+        //     }
+        // }
     }
 
     void MainMenuBar::ShowExceptionThrown() {

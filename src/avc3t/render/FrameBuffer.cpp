@@ -5,6 +5,7 @@
 namespace AVC3T {
     FrameBuffer::FrameBuffer(std::size_t width, std::size_t height) : OpenGLBuffer(width, height) {
         GLCall(glGenFramebuffers(1, &m_BufferID));
+        // GLCall(createFramebuffer(1, &m_BufferID));
     }
 
     FrameBuffer::FrameBuffer(FrameBuffer&& other) : OpenGLBuffer(other.m_Width, other.m_Height) {
@@ -14,6 +15,7 @@ namespace AVC3T {
 
     FrameBuffer::~FrameBuffer() {
         GLCall(glDeleteFramebuffers(1, &m_BufferID));
+        // GLCall(deleteFramebuffer(1, &m_BufferID));
     }
 
     void FrameBuffer::Bind() const {
