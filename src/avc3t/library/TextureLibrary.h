@@ -4,6 +4,7 @@
 #include <string>
 #include <unordered_map>
 
+#include "../io/MemoryIOSystem.h"
 #include "../render/Texture.h"
 
 namespace AVC3T {
@@ -14,12 +15,14 @@ namespace AVC3T {
 
         static TextureLibrary&          GetInstance();
 
-        static void                     FreeTextures();
-        static void                     AddTexture(const std::string& filename, const std::shared_ptr<Texture>& texture);
+        static void                     Init(MemoryIOSystem& memoryIOSystem);
+        static void                     Deinit();
         static std::shared_ptr<Texture> GetTexture(const std::string& filename);
 
       private:
-        TextureLibrary() : m_Textures() {}
+        TextureLibrary() : m_MemoryIOSystem(nullptr), m_Textures() {}
+
+        MemoryIOSystem*                                           m_MemoryIOSystem;
         std::unordered_map<std::string, std::shared_ptr<Texture>> m_Textures;
     };
 }

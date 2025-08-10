@@ -1,4 +1,5 @@
 #include "ShaderLibrary.h"
+#include <iostream>
 
 namespace AVC3T {
     ShaderLibrary& ShaderLibrary::GetInstance() {
@@ -8,12 +9,17 @@ namespace AVC3T {
     }
 
     void ShaderLibrary::CompileShader(const std::string& name, const std::string& filename) {
-        GetInstance().m_Shaders.emplace(name, std::make_shared<Shader>(filename));
+        ShaderLibrary&    instance   = GetInstance();
+        const MemoryFile& memoryFile = instance.m_MemoryIOSystem->OpenFile(filename);
+
+        instance.m_Shaders.emplace(name, std::make_shared<Shader>(memoryFile.GetText()));
     }
 
     std::shared_ptr<Shader> ShaderLibrary::GetShader(const std::string& name) {
-        auto shaders       = GetInstance().m_Shaders;
-        auto libraryShader = shaders.find(name);
+        ShaderLibrary& instance = GetInstance();
+
+        auto           shaders       = instance.m_Shaders;
+        auto           libraryShader = shaders.find(name);
 
         if (libraryShader == shaders.end())
             return shaders[SHADER_DEFAULT_NAME];
@@ -21,7 +27,9 @@ namespace AVC3T {
         return libraryShader->second;
     }
 
-    void ShaderLibrary::Init() {
+    void ShaderLibrary::Init(MemoryIOSystem& memorySystem) {
+        GetInstance().m_MemoryIOSystem = &memorySystem;
+
         CompileShader(SHADER_DEFAULT_NAME, SHADER_DEFAULT_FILENAME);
         CompileShader(SHADER_LINES_NAME, SHADER_LINES_FILENAME);
     }

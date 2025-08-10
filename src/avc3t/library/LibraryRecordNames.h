@@ -32,7 +32,16 @@
 #define SCENE_OBJECT_VECTOR_PNG_FILENAME "res/obj/vector/vector.png"
 
 // ShaderLibrary
-#define SHADER_DEFAULT_NAME     "Default"
+#define SHADER_DEFAULT_NAME "Default"
+#ifdef __EMSCRIPTEN__
+#define SHADER_DEFAULT_FILENAME "res/shader/DefaultShader_ES.shader"
+#else
 #define SHADER_DEFAULT_FILENAME "res/shader/DefaultShader.shader"
-#define SHADER_LINES_NAME       "Lines"
-#define SHADER_LINES_FILENAME   "res/shader/LinesShader.shader"
+#endif
+
+#define SHADER_LINES_NAME "Lines"
+#ifdef __EMSCRIPTEN__
+#define SHADER_LINES_FILENAME "res/shader/LinesShader_ES.shader"
+#else
+#define SHADER_LINES_FILENAME "res/shader/LinesShader.shader"
+#endif

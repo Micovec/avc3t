@@ -2,6 +2,7 @@
 
 #include <memory>
 
+#include "io/MemoryIOSystem.h"
 #include "ui/MainMenuBar.h"
 #include "ui/ScenePanel.h"
 #include "ui/WorkspacePanel.h"
@@ -17,6 +18,8 @@ namespace AVC3T {
         void Update(double ts);
 
       private:
+        MemoryIOSystem                  m_MemoryIOSystem;
+
         std::shared_ptr<ScenePanel>     m_ScenePanel;
         std::shared_ptr<WorkspacePanel> m_WorkspacePanel;
         std::shared_ptr<MainMenuBar>    m_MainMenuBar;

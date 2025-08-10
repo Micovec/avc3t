@@ -2,26 +2,31 @@
 
 #include <imgui/imgui_internal.h>
 
+#include "io/MemoryIOSystemMounter.h"
 #include "library/SceneObjectLibrary.h"
 #include "library/ShaderLibrary.h"
 #include "library/TextureLibrary.h"
 
+#include "mesh/MeshLoader.h"
 #include "ui/TextPopupModal.h"
 
 namespace AVC3T {
     Application::Application() :
-        m_ScenePanel(std::make_shared<ScenePanel>()), m_WorkspacePanel(std::make_shared<WorkspacePanel>(m_ScenePanel)),
+        m_MemoryIOSystem(), m_ScenePanel(std::make_shared<ScenePanel>()), m_WorkspacePanel(std::make_shared<WorkspacePanel>(m_ScenePanel)),
         m_MainMenuBar(std::make_shared<MainMenuBar>(m_WorkspacePanel->GetWorkspace(), m_ScenePanel->GetScene())), m_DockSpaceFlags(ImGuiDockNodeFlags_None) {}
 
     void Application::Init() {
-        SceneObjectLibrary::Init();
-        ShaderLibrary::Init();
+        MemoryIOSystemMounter::Mount(m_MemoryIOSystem);
+        MeshLoader::Init(m_MemoryIOSystem);
+        ShaderLibrary::Init(m_MemoryIOSystem);
+        TextureLibrary::Init(m_MemoryIOSystem);
+        SceneObjectLibrary::Init(m_MemoryIOSystem);
     }
 
     void Application::Deinit() {
         SceneObjectLibrary::Deinit();
         ShaderLibrary::Deinit();
-        TextureLibrary::FreeTextures();
+        TextureLibrary::Deinit();
 
         m_ScenePanel.reset();
         m_WorkspacePanel.reset();

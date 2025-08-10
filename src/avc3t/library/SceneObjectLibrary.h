@@ -4,8 +4,8 @@
 #include <string>
 #include <map>
 
-#include "LibraryRecordNames.h"
 #include "../scene/SceneObject.h"
+#include "../io/MemoryIOSystem.h"
 
 namespace AVC3T {
     class SceneObjectLibrary {
@@ -15,14 +15,16 @@ namespace AVC3T {
 
         static SceneObjectLibrary& GetInstance();
 
-        static void                Init();
+        static void                Init(MemoryIOSystem& memorySystem);
         static void                Deinit();
-        static void                LoadObject(const std::string& objectName, const std::string& objectMtl, const std::string& objectObj, const std::string& objectPng);
+        static void                LoadObject(const std::string& objectName, const std::string& filename);
         static void                UnloadObject(const std::string& objectName);
         static SceneObject         CreateObjectCopy(const std::string& name);
 
       private:
-        SceneObjectLibrary() : m_Meshes() {};
+        SceneObjectLibrary() : m_MemoryIOSystem(nullptr), m_Meshes() {};
+
+        MemoryIOSystem*                                                      m_MemoryIOSystem;
 
         std::map<std::string, std::pair<std::shared_ptr<Mesh>, std::size_t>> m_Meshes;
     };
